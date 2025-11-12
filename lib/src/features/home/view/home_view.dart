@@ -1,3 +1,4 @@
+import 'package:bolsifyv2/src/features/settings/view/setting_view.dart';
 import 'package:flutter/material.dart';
 import '../../../../shared/widgets/widgets.dart';
 import '../../../../styles/styles.dart';
@@ -7,19 +8,17 @@ class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
-
 
   late final List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
-
     _pages = [
 
       Center(
@@ -65,9 +64,15 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
+
+      // Estadísticas
       Center(child: Text('Estadísticas')),
+
+      // Presupuestos
       Center(child: Text('Presupuestos')),
-      Center(child: Text('Ajustes')),
+
+      // Ajustes
+      const SettingView(),
     ];
   }
 
@@ -85,7 +90,10 @@ class _HomeViewState extends State<HomeView> {
         centerTitle: true,
       ),
       backgroundColor: AppColors.background,
-      body: _pages[_currentIndex], // Muestra la página activa
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages, // Mantiene el estado de cada página
+      ),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
         onTabSelected: _onTabSelected,

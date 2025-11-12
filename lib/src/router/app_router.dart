@@ -22,6 +22,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       name: 'auth',
       builder: (context, state) => const AuthView(),
       )
+
     ],
   );
 });
