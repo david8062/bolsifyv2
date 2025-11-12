@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "548896815969",
+    "project_id": "bolsifi",
+    "storage_bucket": "bolsifi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548896815969:android:b5edb40247f952ebd36320",
+        "android_client_info": {
+          "package_name": "com.bolsify.bolsify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548896815969-u8vspr6gnh41962j3emv9upiid8r58m3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa6_-M_816tGUlG3IwqCS1-WcQxBoZtrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548896815969-u8vspr6gnh41962j3emv9upiid8r58m3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548896815969-lgf5qkg4i2al7fiecvd1cmqp44ocf6js.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bolsify.bolsify"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548896815969:android:c2e93f5e8e436c83d36320",
+        "android_client_info": {
+          "package_name": "com.bolsify.bolsifyv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548896815969-u8vspr6gnh41962j3emv9upiid8r58m3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa6_-M_816tGUlG3IwqCS1-WcQxBoZtrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548896815969-u8vspr6gnh41962j3emv9upiid8r58m3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548896815969-lgf5qkg4i2al7fiecvd1cmqp44ocf6js.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bolsify.bolsify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

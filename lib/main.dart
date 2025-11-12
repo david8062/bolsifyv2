@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:bolsifyv2/styles/themes/app_theme_light.dart';
 import 'package:bolsifyv2/src/router/app_router.dart';
 
-void main() {
+Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // 👇 Inicia la app con Riverpod
   runApp(const ProviderScope(child: MyApp()));
 }
 
