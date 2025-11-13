@@ -90,7 +90,8 @@ class _HomeViewState extends State<HomeView> {
         centerTitle: true,
       ),
       backgroundColor: AppColors.background,
-      body: IndexedStack(
+      body:
+      IndexedStack(
         index: _currentIndex,
         children: _pages, // Mantiene el estado de cada página
       ),

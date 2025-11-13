@@ -1,3 +1,6 @@
+import 'package:bolsifyv2/src/features/categories/view/categories_view.dart';
+import 'package:bolsifyv2/styles/colors/app_colors.dart';
+import 'package:bolsifyv2/styles/const/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bolsifyv2/shared/widgets/widgets.dart';
 import 'package:bolsifyv2/shared/animations/fade_slide_animation.dart';
@@ -21,7 +24,7 @@ class _SettingViewState extends State<SettingView> {
   ];
 
   final List<Widget> _tabContents = [
-    Center(child: Text('Contenido de Categorías')),
+    const CategoriesView(),
     Center(child: Text('Contenido de Presupuestos')),
     Center(child: Text('Contenido de Ahorros')),
     Center(child: Text('Contenido de Preferencias')),
@@ -30,8 +33,18 @@ class _SettingViewState extends State<SettingView> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
+        const SizedBox(height: 25),
+        Text("Ajustes",
+        style: TextStyle(
+          fontSize: AppConstants.textTittle,
+          fontWeight: FontWeight.w700,
+          color: AppColors.textStrong
+        ),
+        ),
+        const SizedBox(height: 25),
         SettingsTabs(
           tabs: _tabs,
           initialIndex: _selectedTab,
@@ -41,8 +54,7 @@ class _SettingViewState extends State<SettingView> {
             });
           },
         ),
-        const SizedBox(height: 20),
-        // Aquí mostramos el contenido animado de la pestaña
+        const SizedBox(height: 20), // espacio entre tabs y contenido
         Expanded(
           child: Stack(
             children: List.generate(_tabContents.length, (index) {
@@ -55,5 +67,7 @@ class _SettingViewState extends State<SettingView> {
         ),
       ],
     );
+
+
   }
 }

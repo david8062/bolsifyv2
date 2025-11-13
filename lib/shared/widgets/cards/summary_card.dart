@@ -4,18 +4,18 @@ import 'package:bolsifyv2/styles/styles.dart';
 class SummaryCard extends StatelessWidget {
   final String title;
   final IconData icon;
-  final String amount;
-  final String percentage;
-  final bool positive;
+  final String? amount;
+  final String? percentage;
+  final bool? positive;
   final Color color;
 
   const SummaryCard({
     super.key,
+    this.amount,
+    this.percentage,
+    this.positive,
     required this.title,
     required this.icon,
-    required this.amount,
-    required this.percentage,
-    required this.positive,
     required this.color,
   });
 
@@ -53,40 +53,42 @@ class SummaryCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 20),
-
               // Información
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: AppConstants.textSubTittle,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: AppConstants.textSubTittle,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      amount,
-                      style: const TextStyle(
-                        fontSize: AppConstants.textTittle,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.textSecondary,
+                      const SizedBox(height: 4),
+                      // Muestra el amount, si es null, muestra '-'
+                      Text(
+                        amount ?? '',
+                        style: const TextStyle(
+                          fontSize: AppConstants.textTittle,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textSecondary,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      '${positive ? '+' : '-'}$percentage vs mes anterior',
-                      style: TextStyle(
-                        fontSize: AppConstants.textLabel,
-                        color: positive ? Colors.green : Colors.red,
-                      ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(height: 2),
+                      // Solo mostramos el porcentaje si hay datos
+                      if (percentage != null && positive != null)
+                        Text(
+                          '${positive! ? '+' : '-'}$percentage vs mes anterior',
+                          style: TextStyle(
+                            fontSize: AppConstants.textLabel,
+                            color: positive! ? Colors.green : Colors.red,
+                          ),
+                        ),
+                    ],
+                  )
+
               ),
             ],
           ),

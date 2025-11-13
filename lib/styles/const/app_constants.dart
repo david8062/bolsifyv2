@@ -15,6 +15,7 @@ class AppConstants {
   static const double textInput = 18.0;
   static const double textLabel = 14.0;
   static const double textWarning = 12;
+  static const double textCard = 6;
 
 
 }
