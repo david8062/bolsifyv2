@@ -1,25 +1,32 @@
+import 'package:bolsifyv2/src/features/budgets/ViewModel/budget_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bolsifyv2/styles/styles.dart';
 import 'package:bolsifyv2/shared/widgets/widgets.dart';
 import 'package:bolsifyv2/shared/models/category_enums.dart';
-import '../ViewModel/categories_view_model.dart';
 
-
-class NewCategoryForm extends ConsumerStatefulWidget {
-  const NewCategoryForm({super.key});
+class NewBudgetForm extends ConsumerStatefulWidget {
+  const NewBudgetForm({super.key});
 
   @override
-  ConsumerState<NewCategoryForm> createState() => _NewCategoryFormState();
+  ConsumerState<NewBudgetForm> createState() => _NewBudgetFormState();
 }
 
-class _NewCategoryFormState extends ConsumerState<NewCategoryForm> {
+class _NewBudgetFormState extends ConsumerState<NewBudgetForm> {
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
 
-  // Ahora tu estado es simplemente:
+  final _limitCtrl = TextEditingController();
+  double _limit = 0;
+
   Category _selectedCategory = Category.comida;
   CategoryColor _selectedColor = CategoryColor.azul;
+
+  @override
+  void initState() {
+    super.initState();
+    _limitCtrl.text = "0";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +35,10 @@ class _NewCategoryFormState extends ConsumerState<NewCategoryForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           // Nombre
           Text(
-            "Nombre de la categoría",
+            "Nombre del presupuesto",
             style: TextStyle(
               fontSize: AppConstants.textSubTittle,
               fontWeight: FontWeight.w700,
@@ -38,6 +46,7 @@ class _NewCategoryFormState extends ConsumerState<NewCategoryForm> {
             ),
           ),
           const SizedBox(height: 8),
+
           InputField(
             controller: _nameCtrl,
             hint: "Ej: Entretenimiento",
@@ -49,9 +58,10 @@ class _NewCategoryFormState extends ConsumerState<NewCategoryForm> {
               return null;
             },
           ),
+
           const SizedBox(height: 20),
 
-          // Select de categoría (icono+nombre)
+          // Select de categoría
           SelectInput<Category>(
             label: "Icono",
             value: _selectedCategory,
@@ -66,6 +76,7 @@ class _NewCategoryFormState extends ConsumerState<NewCategoryForm> {
               setState(() => _selectedCategory = cat);
             },
           ),
+
           const SizedBox(height: 20),
 
           // Select de color
@@ -87,7 +98,60 @@ class _NewCategoryFormState extends ConsumerState<NewCategoryForm> {
               setState(() => _selectedColor = color);
             },
           ),
+
           const SizedBox(height: 30),
+
+          // ------------------------------------
+          // CAMPO DEL LÍMITE — SLIDER + INPUT
+          // ------------------------------------
+          Text(
+            "Límite de gasto",
+            style: TextStyle(
+              fontSize: AppConstants.textSubTittle,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textStrong,
+            ),
+          ),
+          const SizedBox(height: 10),
+
+          Row(
+            children: [
+              Expanded(
+                child: Slider(
+                  value: _limit,
+                  min: 0,
+                  max: 3_000_000,
+                  divisions: 100,
+                  activeColor: _selectedColor.color,
+                  label: "\$${_limit.toStringAsFixed(0)}",
+                  onChanged: (value) {
+                    setState(() {
+                      _limit = value;
+                      _limitCtrl.text = value.toStringAsFixed(0);
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(width: 12),
+              SizedBox(
+                width: 90,
+                child: TextField(
+                  controller: _limitCtrl,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Valor",
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (value) {
+                    final parsed = double.tryParse(value) ?? 0;
+                    setState(() => _limit = parsed);
+                  },
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 35),
 
           // Botón guardar
           SizedBox(
@@ -95,29 +159,32 @@ class _NewCategoryFormState extends ConsumerState<NewCategoryForm> {
             child: ElevatedButton.icon(
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  final viewModel = ref.read(categoryViewModelProvider.notifier);
+                  final viewModel = ref.read(budgetViewModelProvider.notifier);
 
-                  await viewModel.createCategory(
+                  await viewModel.createBudget(
                     name: _nameCtrl.text.trim(),
                     iconCode: _selectedCategory.icon.codePoint,
                     colorValue: _selectedColor.color.value,
+                    amountLimit: _limit,
+                    amountNotify: 0.0,
                   );
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Categoria creada con exito")),
+                    const SnackBar(content: Text("Presupuesto creado con éxito")),
                   );
 
                   _nameCtrl.clear();
+                  _limitCtrl.text = "0";
+                  setState(() => _limit = 0);
                 }
               },
               icon: const Icon(Icons.save),
-              label: const Text("Guardar Categoría"),
+              label: const Text("Guardar Presupuesto"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(AppConstants.buttonRadius),
+                  borderRadius: BorderRadius.circular(AppConstants.buttonRadius),
                 ),
               ),
             ),

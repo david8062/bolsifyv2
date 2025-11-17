@@ -18,7 +18,6 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
 
   @override
   Widget build(BuildContext context) {
-    // Ahora sí puedes usar ref
     final categoryVM = ref.watch(categoryViewModelProvider.notifier);
     final categoriesStream = categoryVM.getCategoriesStream();
 
@@ -49,17 +48,27 @@ class _CategoriesViewState extends ConsumerState<CategoriesView> {
                   icon: const Icon(Icons.add),
                   label: const Text('Nueva Categoría'),
                 ),
-                child: Column(
-                  children: categories.isEmpty
-                      ? const [Text("Aún no hay categorías creadas")]
-                      : categories
-                      .map((c) => SummaryCard(
-                    title: c.name,
-                    icon: IconData(c.iconCode, fontFamily: 'MaterialIcons'),
-                    color: Color(c.colorValue),
-                  ))
-                      .toList(),
+                child: categories.isEmpty
+                    ? const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("Aún no hay categorías creadas"),
+                )
+                    : SizedBox(
+                  height: 400, // 🔹 ajusta según tu gusto
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: categories.length,
+                    itemBuilder: (context, index) {
+                      final c = categories[index];
+                      return SummaryCard(
+                        title: c.name,
+                        icon: IconData(c.iconCode, fontFamily: 'MaterialIcons'),
+                        color: Color(c.colorValue),
+                      );
+                    },
+                  ),
                 ),
+
               );
             },
           ),

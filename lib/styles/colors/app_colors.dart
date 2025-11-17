@@ -30,3 +30,4 @@ class AppColors {
     offset: Offset(0, 4),
   );
 }
+
