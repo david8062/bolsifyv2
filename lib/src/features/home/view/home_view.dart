@@ -1,3 +1,4 @@
+import 'package:bolsifyv2/src/features/transactions/views/transactions_view.dart';
 import 'package:bolsifyv2/src/features/settings/view/setting_view.dart';
 import 'package:flutter/material.dart';
 import '../../../../shared/widgets/widgets.dart';
@@ -69,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
       Center(child: Text('Estadísticas')),
 
       // Presupuestos
-      Center(child: Text('Presupuestos')),
+      TransactionView(),
 
       // Ajustes
       const SettingView(),

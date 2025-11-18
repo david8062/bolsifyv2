@@ -36,7 +36,7 @@ class BudgetRepository{
     await _firestore
         .collection('users')
         .doc(userId)
-        .collection('categories')
+        .collection('budgets')
         .doc(categoryId)
         .delete();
   }
@@ -46,10 +46,12 @@ class BudgetRepository{
     await _firestore
         .collection('users')
         .doc(userId)
-        .collection('categories')
+        .collection('budgets')
         .doc(budget.id)
         .update(budget.toMap());
   }
+
+
 
 
 }

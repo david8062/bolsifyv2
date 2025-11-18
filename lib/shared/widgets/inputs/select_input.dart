@@ -3,7 +3,7 @@ import 'package:bolsifyv2/styles/styles.dart';
 
 class SelectInput<T> extends StatelessWidget {
   final String label;
-  final T value;
+  final T? value;
   final List<T> options;
   final String Function(T) labelBuilder;
   final Widget Function(T)? iconBuilder;
@@ -12,7 +12,7 @@ class SelectInput<T> extends StatelessWidget {
   const SelectInput({
     super.key,
     required this.label,
-    required this.value,
+    this.value,
     required this.options,
     required this.onChanged,
     required this.labelBuilder,
@@ -27,7 +27,7 @@ class SelectInput<T> extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: AppConstants.textSubTittle,
+            fontSize: AppConstants.textLabel,
             fontWeight: FontWeight.w700,
             color: AppColors.textStrong,
           ),
@@ -43,7 +43,7 @@ class SelectInput<T> extends StatelessWidget {
           child: DropdownButtonHideUnderline(
             child: DropdownButton<T>(
               isExpanded: true,
-              value: value,
+              value: options.contains(value) ? value : null,
               icon: const Icon(Icons.arrow_drop_down),
               dropdownColor: AppColors.cardBackground,
               style: TextStyle(

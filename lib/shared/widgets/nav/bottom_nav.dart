@@ -31,7 +31,7 @@ class _BottomNavState extends State<BottomNav> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.monetization_on),
-          label: 'Presupuestos',
+          label: 'Administración',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
