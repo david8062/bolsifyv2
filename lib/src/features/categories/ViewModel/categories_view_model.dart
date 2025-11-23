@@ -4,10 +4,35 @@ import '../data/category_repository.dart';
 import '../model/category_model.dart';
 import 'package:uuid/uuid.dart';
 
+final categoriesProvider = StreamProvider<List<CategoryModel>>((ref) {
+  final user = FirebaseAuth.instance.currentUser;
+  if (user == null) throw Exception("Usuario no autenticado");
+  final viewModel = CategoryViewModel(user.uid);
+  return viewModel.getCategoriesStream();
+});
+
+final authStateProvider = StreamProvider<User?>(
+      (ref) => FirebaseAuth.instance.authStateChanges(),
+);
+
 final categoryViewModelProvider =
 StateNotifierProvider<CategoryViewModel, AsyncValue<void>>((ref) {
-  final user = FirebaseAuth.instance.currentUser;
-  return CategoryViewModel(user?.uid ?? '');
+  final auth = ref.watch(authStateProvider);
+
+  return auth.when(
+    data: (user) {
+      if (user == null) {
+        throw Exception("Usuario no autenticado");
+      }
+      return CategoryViewModel(user.uid);
+    },
+    loading: () {
+      return CategoryViewModel('_loading_');
+    },
+    error: (_, __) {
+      return CategoryViewModel('_error_');
+    },
+  );
 });
 
 class CategoryViewModel extends StateNotifier<AsyncValue<void>> {

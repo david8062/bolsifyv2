@@ -6,7 +6,11 @@ class CategoryRepository {
   final String userId;
 
   CategoryRepository(this.userId, {FirebaseFirestore? firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+      : _firestore = firestore ?? FirebaseFirestore.instance {
+    if (userId.isEmpty) {
+      throw ArgumentError("userId no puede ser vacío en CategoryRepository");
+    }
+  }
 
   // Agregar categoría
   Future<void> addCategory(CategoryModel category) async {

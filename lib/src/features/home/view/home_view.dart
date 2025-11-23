@@ -96,6 +96,7 @@ class _HomeViewState extends State<HomeView> {
         index: _currentIndex,
         children: _pages, // Mantiene el estado de cada página
       ),
+      floatingActionButton: const TransactionButton(),
       bottomNavigationBar: BottomNav(
         currentIndex: _currentIndex,
         onTabSelected: _onTabSelected,

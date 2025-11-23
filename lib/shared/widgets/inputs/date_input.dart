@@ -66,13 +66,16 @@ class _DateInputState extends State<DateInput> {
               validator: widget.validator,
               decoration: InputDecoration(
                 hintText: widget.hint,
-                prefixIcon: Icon(Icons.calendar_month, color: AppColors.primary),
+                prefixIcon: Icon(Icons.calendar_month, color: AppColors.iconColor),
                 filled: true,
                 fillColor: AppColors.background,
                 contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppConstants.buttonRadius),
-                  borderSide: BorderSide.none,
+                  borderSide: BorderSide(
+                    color: AppColors.textPrimary,
+                    width: 1.0,
+                  ),
                 ),
               ),
             ),

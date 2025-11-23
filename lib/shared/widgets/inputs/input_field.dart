@@ -42,7 +42,7 @@ class _InputFieldState extends State<InputField> {
       validator: widget.validator,
       decoration: InputDecoration(
         hintText: widget.hint,
-        prefixIcon: Icon(widget.icon, color: AppColors.primary),
+        prefixIcon: Icon(widget.icon, color: AppColors.iconColor),
         suffixIcon: widget.obscureText
             ? IconButton(
           icon: Icon(
@@ -57,7 +57,10 @@ class _InputFieldState extends State<InputField> {
         contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConstants.buttonRadius),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(
+            color: AppColors.textPrimary,
+            width: 1.0
+          ),
         ),
       ),
     );

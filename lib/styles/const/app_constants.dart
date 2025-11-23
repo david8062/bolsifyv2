@@ -10,11 +10,11 @@ class AppConstants {
   //strings
   static const String appName = 'Bolsify';
   //Textos
-  static const double textTittle = 32.0;
-  static const double textSubTittle = 24.0;
-  static const double textInput = 18.0;
-  static const double textLabel = 14.0;
-  static const double textWarning = 12;
+  static const double textTittle = 24.0;
+  static const double textSubTittle = 20.0;
+  static const double textInput = 12.0;
+  static const double textLabel = 10.0;
+  static const double textWarning = 8;
   static const double textCard = 6;
 
 
