@@ -1,6 +1,4 @@
-import 'package:bolsifyv2/shared/animations/fade_slide_animation.dart' show FadeSlideTransition;
-import 'package:bolsifyv2/src/features/transactions/views/budget_transaction_form.dart';
-import 'package:bolsifyv2/styles/const/app_constants.dart';
+import 'package:bolsifyv2/shared/animations/fade_slide_animation.dart';
 import 'package:bolsifyv2/shared/widgets/widgets.dart';
 import 'package:bolsifyv2/styles/styles.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +28,7 @@ class _AdminViewState extends State<TransactionView> {
        child: Center(
          child: SettingsCardContainer(
            title: "Presupuestos",
-           child: BudgetTransactionForm(),
+           child: Text("ah"),
          ),
        ),
      ),
